@@ -2,7 +2,7 @@ cask "keywarden" do
   version "0.1.0,10"
   sha256 "d643918cd3939306b20860eac54b7e1a7943316f88d22427893a5bea49cd0c59"
 
-  url "https://github.com/fogrye/Keywarden/releases/download/v#{version.before_comma}/Keywarden-#{version.before_comma}-#{version.after_comma}.zip"
+  url "https://github.com/fogrye/Keywarden/releases/download/v#{version.csv.first}/Keywarden-#{version.csv.first}-#{version.csv.second}.zip"
   name "Keywarden"
   desc "Native Bitwarden-compatible vault with Touch ID browser unlock"
   homepage "https://github.com/fogrye/Keywarden"
@@ -19,7 +19,7 @@ cask "keywarden" do
   end
 
   depends_on arch: :arm64
-  depends_on macos: ">= :tahoe"
+  depends_on macos: :tahoe
 
   app "Keywarden.app"
 
