@@ -18,6 +18,8 @@ jobs:
       - name: Load tap
         run: brew tap --custom-remote fogrye/tap "$GITHUB_WORKSPACE"
       - name: Validate cask
+        env:
+          HOMEBREW_GITHUB_API_TOKEN: ${{ github.token }}
         run: |
           brew style fogrye/tap/keywarden
           brew audit --cask --strict --online fogrye/tap/keywarden
