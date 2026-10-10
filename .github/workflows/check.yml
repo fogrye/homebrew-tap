@@ -1,0 +1,29 @@
+name: Check cask
+on:
+  push:
+    branches: [main, 'install/**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  install:
+    runs-on: macos-26
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Load tap
+        run: brew tap --custom-remote fogrye/tap "$GITHUB_WORKSPACE"
+      - name: Validate cask
+        run: |
+          brew style fogrye/tap/keywarden
+          brew audit --cask --strict --online fogrye/tap/keywarden
+      - name: Install and verify signed app
+        run: |
+          brew install --cask --appdir="$RUNNER_TEMP/apps" fogrye/tap/keywarden
+          codesign --verify --deep --strict "$RUNNER_TEMP/apps/Keywarden.app"
+          spctl --assess --type execute "$RUNNER_TEMP/apps/Keywarden.app"
+          brew uninstall --cask keywarden
