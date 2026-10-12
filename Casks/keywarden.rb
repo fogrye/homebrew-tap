@@ -1,6 +1,6 @@
 cask "keywarden" do
-  version "0.1.0,10"
-  sha256 "d643918cd3939306b20860eac54b7e1a7943316f88d22427893a5bea49cd0c59"
+  version "0.1.1,13"
+  sha256 "a4c3d5f75005ee93fc7fb2c2ee489e2560f4434fdb2c9aca962e5e7f6246475f"
 
   url "https://github.com/fogrye/Keywarden/releases/download/v#{version.csv.first}/Keywarden-#{version.csv.first}-#{version.csv.second}.zip"
   name "Keywarden"
